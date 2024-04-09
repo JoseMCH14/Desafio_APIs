@@ -1,6 +1,7 @@
 let cambio = document.querySelector("#opciones");
 const input = document.querySelector("#Pesos");
 const resultado = document.querySelector("#resultado");
+const load = document.querySelector("#cargando")
 let html = "";
 let tarea = "";
 let grafico = "";
@@ -63,6 +64,9 @@ calcularValor = async function () {
 };
 
 const PrepararGrafica = async function () {
+  resultado.innerHTML = ` 
+  <p> Cargando</p>
+  `;
   let moneda = cambio.value;
   const flujo = "grafico";
   const Valorhistorico = await obtenerValor(moneda, flujo);
@@ -144,6 +148,9 @@ let renderizar_resultado = function (disponibilidad, monto, moneda) {
 
 async function template_grafica() {
   const config = await PrepararGrafica();
+  resultado.innerHTML = ` 
+  <p style="display:none;"> Cargando</p>
+  `;
   const chartDOM = document.getElementById("myChart");
   grafico = new Chart(chartDOM, config);
   grafico.resize(900, 900);
